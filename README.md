@@ -1,4 +1,4 @@
-## 📋 Descrição
+## Descrição
 
 Este projeto implementa e compara diferentes estratégias de aprendizado contínuo:
 
@@ -13,7 +13,7 @@ Este projeto implementa e compara diferentes estratégias de aprendizado contín
 - **BWT**: Backward Transfer (mede o esquecimento catastrófico)
 - **IM**: Intransigence Measure (diferença para o upper bound)
 
-## 🚀 Instalação
+## Instalação
 
 ### 1. Clone o repositório
 
@@ -40,7 +40,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
 .
@@ -63,7 +63,7 @@ pip install -r requirements.txt
     └── embeddings/        # Embeddings pré-computados (.npy)
 ```
 
-## 📊 Dados
+## Dados
 
 Os dados consistem em embeddings pré-computados de WSIs. A estrutura esperada:
 
@@ -72,13 +72,13 @@ Os dados consistem em embeddings pré-computados de WSIs. A estrutura esperada:
 
 ### Cenário E3 (3 tarefas)
 
-| Tarefa | Classes | Arquivos |
-|--------|---------|----------|
-| 1 | 2, 4 | 2_4_train.csv, 2_4_test.csv |
-| 2 | 0, 5 | 0_5_train.csv, 0_5_test.csv |
-| 3 | 1, 3 | 3_1_train.csv, 3_1_test.csv |
+| Tarefa | Classes | Arquivos                    |
+| ------ | ------- | --------------------------- |
+| 1      | 2, 4    | 2_4_train.csv, 2_4_test.csv |
+| 2      | 0, 5    | 0_5_train.csv, 0_5_test.csv |
+| 3      | 1, 3    | 3_1_train.csv, 3_1_test.csv |
 
-## ▶️ Execução
+## Execução
 
 Execute o experimento completo:
 
@@ -87,6 +87,7 @@ python main.py
 ```
 
 O script irá:
+
 1. Carregar os datasets das 3 tarefas
 2. Treinar cada método sequencialmente
 3. Avaliar e exibir relatório comparativo
@@ -95,51 +96,39 @@ O script irá:
 
 ```
 ===================================================================================================================
-                               RELATÓRIO DE REPRODUÇÃO - COMPARAÇÃO COM O ARTIGO                                   
+                               RELATÓRIO DE REPRODUÇÃO - COMPARAÇÃO COM O ARTIGO
 ===================================================================================================================
-MÉTODO          | MEU AACC   | PAPER      | MEU BWT    | PAPER      | MEU IM     | PAPER     
+MÉTODO          | MEU AACC   | PAPER      | MEU BWT    | PAPER      | MEU IM     | PAPER
 -------------------------------------------------------------------------------------------------------------------
-Fine-Tuning     | 0.XXXX     | 0.3167     | -0.XXXX    | -0.8701    | -0.XXXX    | -0.1942   
-ER (Replay)     | 0.XXXX     | 0.5388     | -0.XXXX    | -0.3869    | -0.XXXX    | -0.0942   
-Ours (AKD)      | 0.XXXX     | 0.5926     | -0.XXXX    | -0.4056    | -0.XXXX    | -0.1604   
+Fine-Tuning     | 0.XXXX     | 0.3167     | -0.XXXX    | -0.8701    | -0.XXXX    | -0.1942
+ER (Replay)     | 0.XXXX     | 0.5388     | -0.XXXX    | -0.3869    | -0.XXXX    | -0.0942
+Ours (AKD)      | 0.XXXX     | 0.5926     | -0.XXXX    | -0.4056    | -0.XXXX    | -0.1604
 -------------------------------------------------------------------------------------------------------------------
-Joint Training  | 0.XXXX     | 0.7311     | N/A        | N/A        | N/A        | N/A       
+Joint Training  | 0.XXXX     | 0.7311     | N/A        | N/A        | N/A        | N/A
 ===================================================================================================================
 ```
 
-## ⚙️ Configurações
+## Configurações
 
 Os hiperparâmetros podem ser ajustados em `src/config.py`:
 
-| Parâmetro | Valor | Descrição |
-|-----------|-------|-----------|
-| `SEED` | 42 | Seed para reprodutibilidade |
-| `NUM_CLASSES` | 6 | Número total de classes |
-| `DIM_FEATURES` | 512 | Dimensão dos embeddings |
-| `BUFFER_SIZE` | 42 | Tamanho do buffer de replay |
-| `AKD_LAMBDA` | 1.0 | Peso da perda AKD |
-| `KD_LAMBDA` | 1.0 | Peso da perda KD |
+| Parâmetro      | Valor | Descrição                   |
+| -------------- | ----- | --------------------------- |
+| `SEED`         | 42    | Seed para reprodutibilidade |
+| `NUM_CLASSES`  | 6     | Número total de classes     |
+| `DIM_FEATURES` | 512   | Dimensão dos embeddings     |
+| `BUFFER_SIZE`  | 42    | Tamanho do buffer de replay |
+| `AKD_LAMBDA`   | 1.0   | Peso da perda AKD           |
+| `KD_LAMBDA`    | 1.0   | Peso da perda KD            |
 
-## 🔬 Detalhes Técnicos
-
-### Modelo CLAM-SB
-
-O modelo usa atenção com gate para agregar instâncias:
-
-1. **Feature Extraction**: Linear + ReLU + Dropout
-2. **Gated Attention**: Mecanismo de atenção para ponderar instâncias
-3. **Classification**: Camada linear para predição
-
-### Knowledge Distillation
-
-- **KD Loss**: KL-divergence entre logits do estudante e professor
-- **AKD Loss**: KL-divergence entre distribuições de atenção
-
-## 📝 Licença
+## Licença
 
 Este projeto é para fins educacionais.
 
-## 📚 Referências
+## Referências
 
 - CLAM: Data Efficient and Weakly Supervised Computational Pathology
 - Continual Learning for Medical Image Analysis
+- A base deste trabalho é o estudo "Advancing Multiple Instance Learning with Continual Learning for Whole Slide Imaging", de Li et al., publicado na CVPR 2025.
+  Referência Completa: LI, Xianrui; CUI, Yufei; CHAN, Antoni B.; LI, Jun. Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2025. pp. 20800-20809.
+  Link: [Advancing Multiple Instance Learning with Continual Learning for Whole Slide Imaging](https://openaccess.thecvf.com/content/CVPR2025/papers/Li_Advancing_Multiple_Instance_Learning_with_Continual_Learning_for_Whole_Slide_CVPR_2025_paper.pdf)
